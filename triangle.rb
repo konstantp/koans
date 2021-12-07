@@ -1,3 +1,7 @@
+# Error class used in part 2.  No need to change this code.
+class TriangleError < StandardError
+end
+
 # Triangle Project Code.
 
 # Triangle analyzes the lengths of the sides of a triangle
@@ -14,9 +18,18 @@
 #   about_triangle_project_2.rb
 #
 def triangle(a, b, c)
-  # WRITE THIS CODE
-end
+  sides = [a, b, c]
+  
+  a, b, c = sides.sort
+  raise TriangleError if a <= 0 or a + b <= c
 
-# Error class used in part 2.  No need to change this code.
-class TriangleError < StandardError
+
+  if sides.uniq.length == 1
+    return :equilateral  
+  end 
+  if sides.uniq.length == 2  
+    return :isosceles 
+  else
+    return :scalene
+  end  
 end
